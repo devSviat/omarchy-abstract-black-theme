@@ -9,7 +9,7 @@ silver-blue of moonlight falling on a matte black surface.
 **Quick start:**
 
 ```bash
-git clone <repo-url> ~/Projects/omarchy-abstract-black-theme
+git clone https://github.com/devSviat/omarchy-abstract-black-theme.git ~/Projects/omarchy-abstract-black-theme
 cd ~/Projects/omarchy-abstract-black-theme
 ./tools/install-theme.sh
 omarchy theme set abstract-black
@@ -41,7 +41,7 @@ Needs Omarchy 4 (Hyprland with the Lua config and the Quickshell bar).
    move or delete it afterwards:
 
    ```bash
-   git clone <repo-url> ~/Projects/omarchy-abstract-black-theme
+   git clone https://github.com/devSviat/omarchy-abstract-black-theme.git ~/Projects/omarchy-abstract-black-theme
    cd ~/Projects/omarchy-abstract-black-theme
    ```
 
