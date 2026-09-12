@@ -12,9 +12,13 @@
 # apart so the wallpaper's extruded ribs cross both window edges — that is
 # where the blur and the lit rim actually show.
 #
-# Needs a monitor showing an EMPTY workspace (8 by default). The theme that was
-# active before is put back at the end, and the windows are always closed, even
-# if a step fails.
+# The workspace must be EMPTY; the script switches to it itself and switches
+# back to the one you were on afterwards. The theme that was active before is
+# also put back, and the windows are always closed, even if a step fails.
+#
+# Switching is `hl.dsp.focus({ workspace = ... })` — Omarchy 4 replaces
+# Hyprland's own dispatcher names with a Lua API, so a plain
+# `hyprctl dispatch workspace 4` reports `ok` and does nothing.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -26,6 +30,7 @@ REPO=$PWD
   exit 1
 }
 WS=${PREVIEW_WORKSPACE:-8}
+ORIGINAL_WS=$(hyprctl monitors -j | python3 -c "import json,sys; print(json.load(sys.stdin)[0]['activeWorkspace']['name'])")
 THEME=abstract-black
 TAG=ab-preview
 PIN_BG=00-dark-background-abstract-network-3d-3840x2160-8324.png
@@ -50,6 +55,7 @@ close_windows() {
 
 cleanup() {
   close_windows
+  [[ -z ${ORIGINAL_WS:-} ]] || goto_workspace "$ORIGINAL_WS" || true
   local now
   now=$(cat "$HOME/.local/state/omarchy/current/theme.name" 2>/dev/null || true)
   if [[ -n $ORIGINAL_THEME && $now != "$ORIGINAL_THEME" ]]; then
@@ -58,6 +64,23 @@ cleanup() {
   rm -rf "$TMP"
 }
 trap cleanup EXIT
+
+# Ask for the workspace and wait for it to actually land: a dispatch can be
+# undone a moment later by anything else driving the session.
+goto_workspace() {
+  local target=$1 i
+  for i in 1 2 3 4 5; do
+    hyprctl dispatch "hl.dsp.focus({ workspace = \"$target\" })" >/dev/null 2>&1 || true
+    sleep 0.6
+    [[ $(hyprctl monitors -j | python3 -c "import json,sys; print(json.load(sys.stdin)[0]['activeWorkspace']['name'])") == "$target" ]] && return 0
+  done
+  return 1
+}
+
+goto_workspace "$WS" || {
+  echo "could not switch to workspace $WS (something keeps switching it back)" >&2
+  exit 1
+}
 
 read -r MONITOR MW MH SCALE < <(hyprctl monitors -j | python3 -c "
 import json, sys
@@ -99,6 +122,16 @@ open_window "$LW" "$LH" "$LX" "$LY" "sh -c 'fastfetch; sleep 120'"
 # -n -R: no swap file and read-only, so killing it leaves nothing behind.
 open_window "$RW" "$RH" "$RX" "$RY" "nvim -n -R $REPO/hyprland.lua"
 sleep 4
+
+# Shoot only if the monitor is still on the workspace we set up. Anything else
+# driving the session can switch it back mid-run, and a shot taken then is a
+# picture of whatever the user actually had open — wrong, and not ours to keep.
+NOW_WS=$(hyprctl monitors -j | python3 -c "import json,sys; print(json.load(sys.stdin)[0]['activeWorkspace']['name'])")
+if [[ $NOW_WS != "$WS" ]]; then
+  echo "workspace moved to $NOW_WS during the shot; nothing captured." >&2
+  echo "rerun when the session is idle." >&2
+  exit 1
+fi
 
 grim -o "$MONITOR" "$TMP/shot.png"
 close_windows
