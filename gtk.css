@@ -115,3 +115,37 @@ popover.menu separator,
 popover modelbutton separator {
   background-color: rgba(255, 255, 255, 0.08);
 }
+
+/*
+ * libadwaita 1.9 mixes --accent-bg-color into its surface backgrounds, and
+ * overriding the surface variables above is NOT enough to stop it: the mix
+ * happens inside the widget rules, which read the accent directly, so a
+ * neutral --sidebar-bg-color still comes out tinted. With this theme's
+ * silver-blue accent that turned every panel blue.
+ *
+ * Measured in Files, sidebar vs the content beside it, against a wallpaper
+ * that is itself +1 blue (blue channel minus red channel):
+ *
+ *   accent #8fb4de, variables only     sidebar rgb(19, 20, 27)  +8
+ *   accent #9a9a9a, variables only     sidebar rgb(17, 17, 18)  +1   <- proof
+ *   accent #8fb4de, surfaces pinned    sidebar rgb(20, 20, 20)   0   <- this
+ *
+ * So the surfaces are pinned here as real background-color properties. The
+ * accent keeps its blue where blue belongs — the selected row, focus rings,
+ * links — and the panels stay black.
+ *
+ * Keep these values equal to --sidebar-bg-color and --view-bg-color above; a
+ * variable that no longer matches its pin is a silent inconsistency.
+ */
+.sidebar-pane,
+.sidebar-pane .navigation-sidebar,
+.navigation-sidebar,
+.sidebar-pane > * {
+  background-color: rgba(23, 23, 23, 0.45);
+}
+
+.content-pane,
+.view,
+scrolledwindow > viewport > widget {
+  background-color: rgba(11, 11, 11, 0.35);
+}

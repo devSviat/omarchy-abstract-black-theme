@@ -140,7 +140,7 @@ Then delete the repo itself.
 | Menu / launcher | `shell.menu.toml`, `shell.launcher.toml` | card 0.68 / 0.62, scrim 0.1 (unblurred), selected row in the accent |
 | Notifications / popups | `shell.notifications.toml`, `shell.popups.toml` | 0.72 / 0.78 |
 | Polkit / tooltip / lock field | `shell.polkit.toml`, `shell.tooltip.toml`, `shell.lock.toml` | 0.85 / 0.9 / 0.55 |
-| GTK apps (Files…) | `gtk.css` | rgba surfaces |
+| GTK apps (Files…) | `gtk.css` | rgba surfaces, with the sidebar and content panes pinned as real properties |
 
 Terminals get alpha on the cell background rather than whole-window opacity, so
 the text itself stays fully opaque. Each terminal config also asks for blur:
@@ -150,6 +150,14 @@ override that. Browsers, video players, games and screen-share targets keep
 Omarchy's opaque rules.
 
 For more see-through, lower the alpha values above; for less, raise them.
+
+One GTK quirk is worth knowing if you change the accent: libadwaita mixes
+`--accent-bg-color` into its own surface backgrounds from inside its widget
+rules, so setting `--sidebar-bg-color` neutral is not enough — under a blue
+accent the Files sidebar still measured +8 blue against a wallpaper of +1. The
+last block of `gtk.css` pins those surfaces as real `background-color`
+properties, which the mix cannot reach. Keep each pin equal to the variable it
+mirrors.
 
 ## Animations
 

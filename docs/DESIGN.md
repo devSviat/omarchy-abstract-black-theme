@@ -82,6 +82,33 @@ tinting every unfocused window edge.
 Rule for anything added later: in a background value, keep blue equal to red,
 and check a composited screenshot rather than the hex.
 
+### libadwaita mixes the accent into its surfaces
+
+Neutralising the ramp was necessary and not sufficient: Files still showed a
+sidebar at `rgb(19, 20, 27)`, +8 blue, with every background variable already
+neutral. libadwaita 1.9 mixes `--accent-bg-color` into its surface backgrounds
+from inside the widget rules, which read the accent directly — so overriding
+`--sidebar-bg-color` and friends does not stop it.
+
+Isolated by swapping only the accent, everything else unchanged:
+
+| Accent | Surfaces | Sidebar | Blue over red |
+|---|---|---|---|
+| `#8fb4de` | variables only | `rgb(19, 20, 27)` | +8 |
+| `#9a9a9a` | variables only | `rgb(17, 17, 18)` | +1 |
+| `#8fb4de` | pinned as properties | `rgb(20, 20, 20)` | 0 |
+
+(The system accent, `org.gnome.desktop.interface accent-color`, is *not* the
+input — the theme's own `--accent-bg-color` overrides it. Changing it to
+`slate` moved nothing, which is what first looked like a dead end.)
+
+The fix is the block at the end of `gtk.css`: the sidebar and content surfaces
+are set as real `background-color` properties on `.sidebar-pane`,
+`.navigation-sidebar`, `.content-pane` and `.view`, which the mix cannot reach.
+The accent keeps its blue on the selected row, focus rings and links.
+
+This applies to any theme here with a saturated accent, not just this one.
+
 ## What is Star Wars', and what is not
 
 Carried over unchanged, because the brief asked for it:

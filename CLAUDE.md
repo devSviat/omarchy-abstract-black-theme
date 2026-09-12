@@ -84,6 +84,16 @@ Both are byte-for-byte reproducible, so a rerun on an unchanged palette leaves
 git clean. The script hard-fails if the brand SVG ever stops carrying exactly
 one `fill="#9ece6a"`.
 
+## libadwaita tints its surfaces with the accent
+
+`gtk.css` ends with explicit `background-color` pins on `.sidebar-pane`,
+`.navigation-sidebar`, `.content-pane` and `.view`. They are not redundant with
+the `--*-bg-color` variables above them: libadwaita 1.9 mixes
+`--accent-bg-color` into surface backgrounds from inside its widget rules, so
+with a neutral `--sidebar-bg-color` the Files sidebar still measured +8 blue.
+Pinning the surfaces as real properties is what fixes it; `docs/DESIGN.md` has
+the three-way measurement. Keep each pin equal to the variable it mirrors.
+
 ## Things that have already broken once (inherited from the other two themes)
 
 1. **No inline comments in `colors.toml`** — `omacalc` reads it with a parser
