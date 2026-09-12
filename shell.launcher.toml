@@ -1,11 +1,11 @@
 # Full [launcher] section. Same glass treatment as [menu]: faint unblurred
 # scrim, frosted card.
-background                = "#0b0b0e"
+background                = "#0b0b0b"
 background-alpha          = 0.62
 text                      = "#d7dae0"
 border                    = "hyprland.active-border-foreground"
 border-alpha              = 0.85
-scrim                     = "#050506"
+scrim                     = "#050505"
 scrim-alpha               = 0.1
 # The selected row is lit in the accent.
 selected-background       = "#8fb4de"

@@ -18,37 +18,37 @@
  * GTK reads CSS once at startup — `nautilus -q` before Files repaints.
  *
  * Base colours (colors.toml):
- *   background         #0b0b0e  rgb(11, 11, 14)
- *   dark_background    #08080b  rgb(8, 8, 11)
- *   lighter_background #17181c  rgb(23, 24, 28)
+ *   background         #0b0b0b  rgb(11, 11, 11)
+ *   dark_background    #080808  rgb(8, 8, 8)
+ *   lighter_background #171717  rgb(23, 23, 23)
  *   foreground         #d7dae0
  *   accent             #8fb4de
  */
 
 :root {
   /* Content surface — the file grid. */
-  --view-bg-color: rgba(11, 11, 14, 0.35);
+  --view-bg-color: rgba(11, 11, 11, 0.35);
   --view-fg-color: #d7dae0;
 
   /* Window chrome. */
-  --window-bg-color: rgba(8, 8, 11, 0.70);
+  --window-bg-color: rgba(8, 8, 8, 0.70);
   --window-fg-color: #d7dae0;
-  --headerbar-bg-color: rgba(8, 8, 11, 0.30);
+  --headerbar-bg-color: rgba(8, 8, 8, 0.30);
   --headerbar-fg-color: #d7dae0;
   --headerbar-border-color: #d7dae0;
-  --headerbar-backdrop-color: rgba(8, 8, 11, 0.30);
+  --headerbar-backdrop-color: rgba(8, 8, 8, 0.30);
   --headerbar-shade-color: rgba(0, 0, 0, 0.30);
 
   /* Sidebar lifts a step above the content, into the graphite of the lattice. */
-  --sidebar-bg-color: rgba(23, 24, 28, 0.45);
+  --sidebar-bg-color: rgba(23, 23, 23, 0.45);
   --sidebar-fg-color: #d7dae0;
-  --sidebar-backdrop-color: rgba(23, 24, 28, 0.45);
+  --sidebar-backdrop-color: rgba(23, 23, 23, 0.45);
   --sidebar-border-color: rgba(255, 255, 255, 0.06);
   --sidebar-shade-color: rgba(0, 0, 0, 0.30);
 
-  --secondary-sidebar-bg-color: rgba(11, 11, 14, 0.35);
+  --secondary-sidebar-bg-color: rgba(11, 11, 11, 0.35);
   --secondary-sidebar-fg-color: #d7dae0;
-  --secondary-sidebar-backdrop-color: rgba(11, 11, 14, 0.35);
+  --secondary-sidebar-backdrop-color: rgba(11, 11, 11, 0.35);
   --secondary-sidebar-border-color: rgba(255, 255, 255, 0.06);
   --secondary-sidebar-shade-color: rgba(0, 0, 0, 0.30);
 
@@ -56,15 +56,15 @@
   --card-bg-color: rgba(255, 255, 255, 0.05);
   --card-fg-color: #d7dae0;
   --card-shade-color: rgba(0, 0, 0, 0.30);
-  --thumbnail-bg-color: rgba(23, 24, 28, 0.60);
+  --thumbnail-bg-color: rgba(23, 23, 23, 0.60);
   --thumbnail-fg-color: #d7dae0;
 
   /* Popovers and dialogs float over other content, so they stay mostly solid;
      Hyprland still blurs what little shows through (blur.popups). */
-  --popover-bg-color: rgba(8, 8, 11, 0.88);
+  --popover-bg-color: rgba(8, 8, 8, 0.88);
   --popover-fg-color: #d7dae0;
   --popover-shade-color: rgba(0, 0, 0, 0.40);
-  --dialog-bg-color: rgba(8, 8, 11, 0.88);
+  --dialog-bg-color: rgba(8, 8, 8, 0.88);
   --dialog-fg-color: #d7dae0;
 
   --shade-color: rgba(0, 0, 0, 0.30);
@@ -74,17 +74,17 @@
      it is the dark background (9.1:1); the text-on-background tint is lifted so
      links clear the dark glass. */
   --accent-bg-color: #8fb4de;
-  --accent-fg-color: #0b0b0e;
+  --accent-fg-color: #0b0b0b;
   --accent-color: #b3cdec;
 
   --destructive-bg-color: #e5545a;
   --destructive-fg-color: #ffffff;
   --destructive-color: #ff757b;
   --success-bg-color: #57d9a3;
-  --success-fg-color: #0b0b0e;
+  --success-fg-color: #0b0b0b;
   --success-color: #7ceac0;
   --warning-bg-color: #ecc46a;
-  --warning-fg-color: #0b0b0e;
+  --warning-fg-color: #0b0b0b;
   --warning-color: #f7d68a;
   --error-bg-color: #e5545a;
   --error-fg-color: #ffffff;
@@ -101,13 +101,13 @@
  * dirty blurred band around every menu.
  */
 popover > contents {
-  background-color: rgba(8, 8, 11, 0.88);
+  background-color: rgba(8, 8, 8, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
 popover > arrow {
-  background-color: rgba(8, 8, 11, 0.88);
+  background-color: rgba(8, 8, 8, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 

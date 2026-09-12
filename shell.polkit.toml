@@ -1,6 +1,6 @@
 # Full [polkit] section. A password prompt should stand out from what is behind
 # it, so the card stays mostly solid and the scrim stays dark.
-background       = "#0b0b0e"
+background       = "#0b0b0b"
 background-alpha = 0.85
 text             = "#d7dae0"
 text-error       = "#e5545a"

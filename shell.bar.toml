@@ -9,14 +9,14 @@
 # `background`. Both wallpapers are near-black, so a bar carrying the theme's
 # own `background` composites to roughly what the windows do and the two merge
 # into one dark field. Measured over the lattice wallpaper: windows land near
-# #0d0d10, while #17181c at 0.62 puts the bar at about #141519 — one step
+# #0d0d0e, while #171717 at 0.62 puts the bar at about #141515 — one step
 # lighter, so it reads as chrome resting on the black rather than as a hole cut
 # in it.
 #
 # This only shows when the bar's own transparent mode is off (Omarchy Menu ->
 # Style -> Bar -> Transparency, or `omarchy-bar transparent false`); in that
 # mode the bar draws no background at all and no theme tint can reach it.
-background       = "#17181c"
+background       = "#171717"
 background-alpha = 0.62
 text             = "#d7dae0"
 # Modules calling attention to themselves (recording, voxtype, alerts, updates)

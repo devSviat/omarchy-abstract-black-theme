@@ -31,9 +31,9 @@ local o = o
 -- catching moonlight rather than as a coloured frame.
 -- colors.toml hyprland_active_border.
 local active_border_color = { colors = { "rgba(d7e4f866)", "rgba(8fb4de2e)" }, angle = 90 }
--- colors.toml hyprland_inactive_border: `selection` (#232833) at 50%, a soft
+-- colors.toml hyprland_inactive_border: `selection` (#202329) at 50%, a soft
 -- graphite edge in the same glass as the bar and the windows.
-local inactive_border_color = "rgba(23283380)"
+local inactive_border_color = "rgba(20232980)"
 
 hl.config({
   general = {
@@ -74,8 +74,8 @@ hl.config({
       range = 30,
       render_power = 3,
       offset = { 3, 6 },
-      color = "rgba(0505069e)",
-      color_inactive = "rgba(0505066b)",
+      color = "rgba(0505059e)",
+      color_inactive = "rgba(0505056b)",
     },
 
     -- Frosted glass. Three passes at size 9 is a wide, smooth blur without

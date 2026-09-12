@@ -53,7 +53,7 @@ changing them: `rounding 14 / power 2.5`, shadow `offset {3, 6}`, and blur
 **The bar is tinted with `lighter_background`, not `background`.** Every other
 surface takes `background`. On these wallpapers a bar carrying `background`
 composites to roughly what the windows do and the two merge into one dark
-field; `#17181c` at 0.62 puts it about one step lighter, so it reads as chrome.
+field; `#171717` at 0.62 puts it about one step lighter, so it reads as chrome.
 This is the opposite of Star Wars, where the bar sits a step deeper.
 
 **Every terminal config must ask for blur** (`blur=yes` in foot, and the

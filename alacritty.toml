@@ -6,35 +6,35 @@ opacity = 0.72
 blur = true
 
 [colors.primary]
-background = "#0b0b0e"
+background = "#0b0b0b"
 foreground = "#d7dae0"
 
 [colors.cursor]
-text = "#0b0b0e"
+text = "#0b0b0b"
 cursor = "#ffffff"
 
 [colors.vi_mode_cursor]
-text = "#0b0b0e"
+text = "#0b0b0b"
 cursor = "#ffffff"
 
 [colors.search.matches]
-foreground = "#0b0b0e"
+foreground = "#0b0b0b"
 background = "#ecc46a"
 
 [colors.search.focused_match]
-foreground = "#0b0b0e"
+foreground = "#0b0b0b"
 background = "#e5545a"
 
 [colors.footer_bar]
-foreground = "#0b0b0e"
+foreground = "#0b0b0b"
 background = "#d7dae0"
 
 [colors.selection]
 text = "#ffffff"
-background = "#232833"
+background = "#202329"
 
 [colors.normal]
-black = "#0b0b0e"
+black = "#0b0b0b"
 red = "#e5545a"
 green = "#57d9a3"
 yellow = "#ecc46a"

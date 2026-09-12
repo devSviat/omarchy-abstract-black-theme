@@ -2,7 +2,7 @@
 # itself and a theme cannot redirect it; this styles only the password field on
 # top of it. Stock tokyo-night ships a partial [lock] and loses `background`
 # that way, so every key is carried here.
-background       = "#0b0b0e"
+background       = "#0b0b0b"
 background-alpha = 0.55
 text             = "#d7dae0"
 placeholder      = "#8d9199"

@@ -42,9 +42,9 @@ Black* (warm amber `#e8a94e`, a sunrise over the dunes) and *Prism Black*
 ## Palette
 
 ```
-background #0b0b0e   dark #08080b   darker #050506   lighter #17181c
+background #0b0b0b   dark #080808   darker #050505   lighter #171717
 foreground #d7dae0   dark #8d9199   light #e8eaee   bright #ffffff
-accent #8fb4de   selection #232833   muted #5a5f6b
+accent #8fb4de   selection #202329   muted #5a5f6b
 red #e5545a  green #57d9a3  yellow #ecc46a  blue #5aa2f0
 magenta #a67cf0  cyan #5cd0e0  orange #f0894a  brown #8a7a6a
 ```
@@ -53,7 +53,7 @@ Contrast against `background`, computed (WCAG relative luminance):
 
 | Pair | Ratio |
 |---|---|
-| `foreground` on `background` | 13.3:1 |
+| `foreground` on `background` | 14.1:1 |
 | `accent` on `background` | 9.1:1 |
 | `dark_foreground` on `background` | 6.2:1 |
 | `muted` on `background` | 3.1:1 — comments and disabled text only |
@@ -63,6 +63,24 @@ Contrast against `background`, computed (WCAG relative luminance):
 rather than equal to it: window transparency (0.90) lets the wallpaper through
 on top, and a surface at exactly the wallpaper's value leaves the window with
 no edge of its own.
+
+### The backgrounds must be measured, not eyeballed
+
+The first cut of this palette shipped `#0b0b0e` / `#08080b` / `#17181c` — a
+blue channel 3 to 5 points above the red one. It looked neutral in isolation
+and was not: translucent surfaces stack, and in Files the sidebar
+(`--sidebar-bg-color` at 0.45 over `--window-bg-color` at 0.70) came out at
+`rgb(24, 25, 32)`, +8 blue, against content at `rgb(15, 15, 17)`, +2 — the +2
+being the wallpaper's own. The panel read plainly blue next to it.
+
+The ramp is now dead neutral (R = G = B in all four values), so the only hue in
+the chrome is the accent and `selection`. `selection` itself was halved, from
+`#232833` (+16 blue) to `#202329` (+9): it is a highlight and the accent's own
+shadow, so it keeps a little, but it is also `hyprland_inactive_border` and was
+tinting every unfocused window edge.
+
+Rule for anything added later: in a background value, keep blue equal to red,
+and check a composited screenshot rather than the hex.
 
 ## What is Star Wars', and what is not
 
@@ -81,7 +99,7 @@ Changed, each because the wallpapers are achromatic and near-black:
 
 | Value | Star Wars | Here | Why |
 |---|---|---|---|
-| `background` | `#0d0e15` (navy-tinted) | `#0b0b0e` | any hue in the surfaces reads as a cast against a grey wallpaper |
+| `background` | `#0d0e15` (navy-tinted) | `#0b0b0b` (neutral) | any hue in the surfaces reads as a cast against a grey wallpaper, and stacks across translucent layers |
 | `rounding` / `rounding_power` | 10 / 3 | 14 / 2.5 | the lattice is built from generously rounded extrusions; at radius 14 a power of 3 reads as visibly squared-off |
 | shadow `offset` | `{0, 5}` | `{3, 6}` | both wallpapers are lit from the upper left and cast down-right; the windows join that light instead of sitting in a symmetric halo |
 | blur `brightness` | 0.75 | 0.80 | nothing bright is behind the windows to pull down; lower turns the blur to mud |
@@ -95,8 +113,8 @@ the darkest part of its wallpaper and the tint has to carry the colour alone.
 
 Here the wallpaper is already near-black everywhere, so the same choice makes
 the bar and the windows composite to nearly the same value and merge into one
-field. Measured over the lattice wallpaper: windows land near `#0d0d10`, while
-`#17181c` at 0.62 puts the bar at about `#141519` — one step lighter, so it
+field. Measured over the lattice wallpaper: windows land near `#0d0d0e`, while
+`#171717` at 0.62 puts the bar at about `#141515` — one step lighter, so it
 reads as chrome resting on the black rather than as a hole cut in it.
 
 Both only apply with the bar's own transparent mode off (Omarchy Menu → Style →

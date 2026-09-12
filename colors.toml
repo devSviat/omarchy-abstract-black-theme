@@ -20,21 +20,27 @@
 mode = "dark"
 
 # accent    <- moonlight on black: a cold silver-blue, 9.1:1 on `background`
-# selection <- the accent pulled down into the shadows
+# selection <- the accent pulled down into the shadows. It is the only chrome
+#              value that is allowed any hue of its own, and only a little:
+#              +9 blue over neutral, half of what it first carried.
 # muted     <- the lattice's lit edge (#2f3136), lifted to 3.1:1 for comments
 accent    = "#8fb4de"
-selection = "#232833"
+selection = "#202329"
 muted     = "#5a5f6b"
 
-# True neutral black, not a tinted near-black: the lattice wallpaper sits at
-# #141416 and the dunes at #171717, so any hue in the surfaces would read as a
-# cast against them. `background` goes one step below the wallpaper and the
-# others step either side of it; window transparency lets the real wallpaper
-# through on top.
-background         = "#0b0b0e"
-dark_background    = "#08080b"
-darker_background  = "#050506"
-lighter_background = "#17181c"
+# True neutral black, and it has to be measured rather than eyeballed. These
+# four values stack: a GTK sidebar is one translucent surface over another, so
+# a tint of +5 blue in `lighter_background` composites to +8 on screen and the
+# panel reads visibly blue next to the wallpaper. Keep the blue channel equal
+# to the red one in every value here; the accent is where hue belongs.
+#
+# `lighter_background` is exactly #171717, the mean of the dunes wallpaper.
+# `background` goes one step below the lattice wallpaper's #141416, so window
+# transparency has something to lift; the others step either side.
+background         = "#0b0b0b"
+dark_background    = "#080808"
+darker_background  = "#050505"
+lighter_background = "#171717"
 
 # foreground <- the silver highlight on the dune ridge, slightly cooled
 foreground        = "#d7dae0"
@@ -50,7 +56,7 @@ bright_foreground = "#ffffff"
 # same rim. Kept in step by hand with hyprland.lua, which is written out
 # rather than generated.
 hyprland_active_border   = "rgba(d7e4f866) rgba(8fb4de2e) 90deg"
-hyprland_inactive_border = "rgba(23283380)"
+hyprland_inactive_border = "rgba(20232980)"
 
 red     = "#e5545a"
 yellow  = "#ecc46a"

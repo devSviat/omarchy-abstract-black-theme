@@ -36,7 +36,7 @@ SRC=brand/omarchy-logo.svg
 LOGO_SIZE=520
 
 # Kept in step with colors.toml by hand; nothing generates this file.
-BACKGROUND="#0b0b0e"
+BACKGROUND="#0b0b0b"
 FOREGROUND="#d7dae0"
 RIM_TOP="#d7e4f8"
 RIM_BOTTOM="#8fb4de"

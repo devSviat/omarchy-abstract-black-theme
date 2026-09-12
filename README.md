@@ -116,14 +116,14 @@ Then delete the repo itself.
 
 | Role | Value | From |
 |---|---|---|
-| `background` | `#0b0b0e` | true neutral black, a step below the lattice wallpaper's `#141416` |
-| `dark_background` / `darker_background` | `#08080b` / `#050506` | one and two steps below |
-| `lighter_background` | `#17181c` | the lattice's lit face; also the bar's tint |
+| `background` | `#0b0b0b` | true neutral black — blue channel equal to red, measured not eyeballed |
+| `dark_background` / `darker_background` | `#080808` / `#050505` | one and two steps below |
+| `lighter_background` | `#171717` | the mean of the dunes wallpaper exactly; also the bar's tint |
 | `foreground` | `#d7dae0` | the silver highlight on the dune ridge, cooled |
 | `accent` | `#8fb4de` | moonlight on black — 9.1:1 on `background` |
-| `selection` | `#232833` | the accent pulled down into the shadows |
+| `selection` | `#202329` | the accent pulled down into the shadows — the only chrome value with any hue |
 | `muted` | `#5a5f6b` | the lattice's lit edge (`#2f3136`), lifted to 3.1:1 for comments |
-| active border | pale silver `#d7e4f8` 40% → accent `#8fb4de` 18%, 90°; inactive `#232833` 50%; shell rims at 85% | a glass rim lit from above |
+| active border | pale silver `#d7e4f8` 40% → accent `#8fb4de` 18%, 90°; inactive `#202329` 50%; shell rims at 85% | a glass rim lit from above |
 | `green` | `#57d9a3` | a console green, for `git diff` and btop |
 | `yellow` / `orange` | `#ecc46a` / `#f0894a` | warnings and diagnostics |
 | `blue` / `magenta` | `#5aa2f0` / `#a67cf0` | links and keywords |
@@ -136,7 +136,7 @@ Then delete the repo itself.
 | Glass edge | `hyprland.lua` | rim border, superellipse corners (`rounding_power 2.5`), shadow offset 3 px right / 6 px down |
 | App windows | `hyprland.lua` | opacity 0.90 active / 0.82 inactive |
 | Terminals | `foot.ini`, `ghostty.conf`, `alacritty.toml`, `kitty.conf` | background alpha 0.72 + blur requested, window 1.0 / 0.94 |
-| Bar | `shell.bar.toml` | `lighter_background` at 0.62 — one step *above* the windows, so it reads as chrome on the black rather than a hole in it |
+| Bar | `shell.bar.toml` | `lighter_background` at 0.62 → about `#141515`, one step *above* the windows' `#0d0d0e`, so it reads as chrome on the black rather than a hole in it |
 | Menu / launcher | `shell.menu.toml`, `shell.launcher.toml` | card 0.68 / 0.62, scrim 0.1 (unblurred), selected row in the accent |
 | Notifications / popups | `shell.notifications.toml`, `shell.popups.toml` | 0.72 / 0.78 |
 | Polkit / tooltip / lock field | `shell.polkit.toml`, `shell.tooltip.toml`, `shell.lock.toml` | 0.85 / 0.9 / 0.55 |
