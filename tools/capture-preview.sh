@@ -8,9 +8,16 @@
 # The theme is applied for real before the shot (fastfetch prints the active
 # theme's name, so a picture taken under the wrong theme is visibly wrong), and
 # two floating windows are opened over the lattice wallpaper: fastfetch on the
-# left, this theme's hyprland.lua in Neovim on the right. They sit low and wide
-# apart so the wallpaper's extruded ribs cross both window edges — that is
-# where the blur and the lit rim actually show.
+# left, this theme's hyprland.lua in Neovim on the right. They are set wide
+# apart and roughly centred so the wallpaper's extruded ribs cross both window
+# edges — that is where the blur and the lit rim actually show — and so the bar
+# stays visible above them.
+#
+# fastfetch runs with `--logo none`: its default ASCII logo is Omarchy's, in a
+# neon green that has nothing to do with this palette and, at this window size,
+# swamps it. Without it the pane shows the info block and fastfetch's own
+# 16-colour row, which is the theme's ANSI ramp — a better advert for a theme
+# than a distro logo.
 #
 # The workspace must be EMPTY; the script switches to it itself and switches
 # back to the one you were on afterwards. The theme that was active before is
@@ -96,13 +103,13 @@ if ! hyprctl clients -j | python3 -c "import json,sys; sys.exit(any(c['workspace
 fi
 
 # Window geometry in the monitor's logical space, as fractions of its size, so
-# the composition holds whatever the screen. Both windows sit low (40% to 86%
-# of the height) and are wide enough (43%) for fastfetch to lay out and print
-# the theme's name in full.
+# the composition holds whatever the screen. Both windows span 22% to 80% of
+# the height, which leaves the bar clear at the top and wallpaper visible all
+# round, and are wide enough (44%) for fastfetch to lay out without wrapping.
 read -r LW LH LX LY RW RH RX RY < <(python3 -c "
 w = $MW / $SCALE; h = $MH / $SCALE
-print(int(w*0.43), int(h*0.46), int(w*0.02), int(h*0.40),
-      int(w*0.42), int(h*0.46), int(w*0.56), int(h*0.40))")
+print(int(w*0.44), int(h*0.58), int(w*0.025), int(h*0.22),
+      int(w*0.44), int(h*0.58), int(w*0.535), int(h*0.22))")
 
 open_window() {
   local w=$1 h=$2 x=$3 y=$4
@@ -118,7 +125,7 @@ omarchy-theme-set "$THEME" >/dev/null
 omarchy-theme-bg-set "$HOME/.local/state/omarchy/current/theme/backgrounds/$PIN_BG" >/dev/null 2>&1 || true
 sleep 5
 
-open_window "$LW" "$LH" "$LX" "$LY" "sh -c 'fastfetch; sleep 120'"
+open_window "$LW" "$LH" "$LX" "$LY" "sh -c 'fastfetch --logo none; sleep 120'"
 # -n -R: no swap file and read-only, so killing it leaves nothing behind.
 open_window "$RW" "$RH" "$RX" "$RY" "nvim -n -R $REPO/hyprland.lua"
 sleep 4
