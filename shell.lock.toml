@@ -1,0 +1,15 @@
+# Full [lock] section. The lock screen always blurs the current wallpaper
+# itself and a theme cannot redirect it; this styles only the password field on
+# top of it. Stock tokyo-night ships a partial [lock] and loses `background`
+# that way, so every key is carried here.
+background       = "#0b0b0e"
+background-alpha = 0.55
+text             = "#d7dae0"
+placeholder      = "#8d9199"
+text-error       = "#e5545a"
+border           = "hyprland.active-border"
+border-active    = "hyprland.active-border"
+border-error     = "#e5545a"
+border-alpha     = 0.85
+selection        = "#8fb4de"
+selection-alpha  = 0.45

@@ -1,0 +1,7 @@
+# Full [tooltip] section. Tooltips are small and short-lived, so they stay
+# nearly solid for legibility.
+background       = "#0b0b0e"
+background-alpha = 0.9
+text             = "#d7dae0"
+border           = "hyprland.active-border-foreground"
+border-alpha     = 0.85

@@ -1,0 +1,8 @@
+# Full [notifications] section — see shell.bar.toml about section replacement.
+# A glass card over the blurred desktop.
+background       = "#0b0b0e"
+background-alpha = 0.72
+text             = "#d7dae0"
+border           = "hyprland.active-border"
+border-alpha     = 0.85
+countdown        = "#8fb4de"

@@ -1,0 +1,117 @@
+/*
+ * Abstract Black — libadwaita / GTK 4 surfaces.
+ *
+ * Omarchy has no GTK template, and libadwaita ignores `gtk-theme`: it paints
+ * from its own named palette. This file overrides that palette. GTK reads it
+ * from ~/.config/gtk-4.0/gtk.css, which has to be a symlink to the copy in the
+ * active theme:
+ *
+ *   ln -sfn ~/.local/state/omarchy/current/theme/gtk.css ~/.config/gtk-4.0/gtk.css
+ *
+ * The surfaces are translucent on purpose: Hyprland blurs what is behind any
+ * window with alpha (decoration.blur in hyprland.lua), so see-through window
+ * chrome reads as frosted glass rather than as a hole. Text and icons stay
+ * opaque — only the fills carry alpha. The fills stack (a content view sits on
+ * the window background), so the values are low: window 0.70 plus view 0.35
+ * composite to about 0.80.
+ *
+ * GTK reads CSS once at startup — `nautilus -q` before Files repaints.
+ *
+ * Base colours (colors.toml):
+ *   background         #0b0b0e  rgb(11, 11, 14)
+ *   dark_background    #08080b  rgb(8, 8, 11)
+ *   lighter_background #17181c  rgb(23, 24, 28)
+ *   foreground         #d7dae0
+ *   accent             #8fb4de
+ */
+
+:root {
+  /* Content surface — the file grid. */
+  --view-bg-color: rgba(11, 11, 14, 0.35);
+  --view-fg-color: #d7dae0;
+
+  /* Window chrome. */
+  --window-bg-color: rgba(8, 8, 11, 0.70);
+  --window-fg-color: #d7dae0;
+  --headerbar-bg-color: rgba(8, 8, 11, 0.30);
+  --headerbar-fg-color: #d7dae0;
+  --headerbar-border-color: #d7dae0;
+  --headerbar-backdrop-color: rgba(8, 8, 11, 0.30);
+  --headerbar-shade-color: rgba(0, 0, 0, 0.30);
+
+  /* Sidebar lifts a step above the content, into the graphite of the lattice. */
+  --sidebar-bg-color: rgba(23, 24, 28, 0.45);
+  --sidebar-fg-color: #d7dae0;
+  --sidebar-backdrop-color: rgba(23, 24, 28, 0.45);
+  --sidebar-border-color: rgba(255, 255, 255, 0.06);
+  --sidebar-shade-color: rgba(0, 0, 0, 0.30);
+
+  --secondary-sidebar-bg-color: rgba(11, 11, 14, 0.35);
+  --secondary-sidebar-fg-color: #d7dae0;
+  --secondary-sidebar-backdrop-color: rgba(11, 11, 14, 0.35);
+  --secondary-sidebar-border-color: rgba(255, 255, 255, 0.06);
+  --secondary-sidebar-shade-color: rgba(0, 0, 0, 0.30);
+
+  /* Cards and thumbnails are a tint over whatever is behind them. */
+  --card-bg-color: rgba(255, 255, 255, 0.05);
+  --card-fg-color: #d7dae0;
+  --card-shade-color: rgba(0, 0, 0, 0.30);
+  --thumbnail-bg-color: rgba(23, 24, 28, 0.60);
+  --thumbnail-fg-color: #d7dae0;
+
+  /* Popovers and dialogs float over other content, so they stay mostly solid;
+     Hyprland still blurs what little shows through (blur.popups). */
+  --popover-bg-color: rgba(8, 8, 11, 0.88);
+  --popover-fg-color: #d7dae0;
+  --popover-shade-color: rgba(0, 0, 0, 0.40);
+  --dialog-bg-color: rgba(8, 8, 11, 0.88);
+  --dialog-fg-color: #d7dae0;
+
+  --shade-color: rgba(0, 0, 0, 0.30);
+  --scrollbar-outline-color: rgba(0, 0, 0, 0.5);
+
+  /* Accent: moonlight on black. White on it is 2.2:1, so the text that sits on
+     it is the dark background (9.1:1); the text-on-background tint is lifted so
+     links clear the dark glass. */
+  --accent-bg-color: #8fb4de;
+  --accent-fg-color: #0b0b0e;
+  --accent-color: #b3cdec;
+
+  --destructive-bg-color: #e5545a;
+  --destructive-fg-color: #ffffff;
+  --destructive-color: #ff757b;
+  --success-bg-color: #57d9a3;
+  --success-fg-color: #0b0b0e;
+  --success-color: #7ceac0;
+  --warning-bg-color: #ecc46a;
+  --warning-fg-color: #0b0b0e;
+  --warning-color: #f7d68a;
+  --error-bg-color: #e5545a;
+  --error-fg-color: #ffffff;
+  --error-color: #ff757b;
+}
+
+/*
+ * Popovers and menus: a hairline border and a short, light shadow so a menu
+ * lifts off translucent chrome instead of blending into it.
+ *
+ * The shadow stays at or below 35% on purpose. Hyprland frosts a popup wherever
+ * its pixels are denser than decoration.blur.popups_ignorealpha (0.5 in
+ * hyprland.lua); a heavier shadow gets frosted and darkened too, and reads as a
+ * dirty blurred band around every menu.
+ */
+popover > contents {
+  background-color: rgba(8, 8, 11, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+popover > arrow {
+  background-color: rgba(8, 8, 11, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+popover.menu separator,
+popover modelbutton separator {
+  background-color: rgba(255, 255, 255, 0.08);
+}

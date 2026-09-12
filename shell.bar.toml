@@ -1,0 +1,26 @@
+# Full [bar] section. shell.<section>.toml REPLACES the generated section
+# outright — it is not merged — so every key the template defines is repeated
+# here. Dropping a key silently reverts it to a QML default rather than to the
+# template value.
+#
+# The bar is glass: Hyprland blurs behind the omarchy-bar layer (hyprland.lua).
+#
+# Unlike the windows, the bar is tinted with `lighter_background`, not
+# `background`. Both wallpapers are near-black, so a bar carrying the theme's
+# own `background` composites to roughly what the windows do and the two merge
+# into one dark field. Measured over the lattice wallpaper: windows land near
+# #0d0d10, while #17181c at 0.62 puts the bar at about #141519 — one step
+# lighter, so it reads as chrome resting on the black rather than as a hole cut
+# in it.
+#
+# This only shows when the bar's own transparent mode is off (Omarchy Menu ->
+# Style -> Bar -> Transparency, or `omarchy-bar transparent false`); in that
+# mode the bar draws no background at all and no theme tint can reach it.
+background       = "#17181c"
+background-alpha = 0.62
+text             = "#d7dae0"
+# Modules calling attention to themselves (recording, voxtype, alerts, updates)
+active           = "#e5545a"
+scale-with-font  = true
+size-horizontal  = 26
+size-vertical    = 28

@@ -1,0 +1,69 @@
+# Abstract Black — an Omarchy 4 theme for near-achromatic black wallpapers.
+#
+# Both of this theme's backgrounds are monochrome: the extruded 3D lattice
+# averages #141416 and the desert dunes are a pure grey ramp. There is no hue
+# in either to draw a palette from, so the colour here is a decision rather
+# than an extraction: the base is true neutral black, and the one colour in
+# the chrome is the light falling on it — a cold silver-blue, the colour of
+# moonlight on a matte black surface.
+#
+# Everything that is not chrome (the ANSI ramp) stays a legible terminal
+# palette: a console green for git diff and btop, amber and orange for
+# warnings, blue and violet for links and keywords.
+#
+# Comments stay on their own lines. `key = "value" # note` is valid TOML and
+# every Omarchy consumer parses it correctly, but omacalc reads colors.toml
+# with a parser that takes the rest of the line as the value, so an inline
+# comment leaves it without a usable palette and it draws an empty black
+# window. Same rule kept in the shell.*.toml files.
+
+mode = "dark"
+
+# accent    <- moonlight on black: a cold silver-blue, 9.1:1 on `background`
+# selection <- the accent pulled down into the shadows
+# muted     <- the lattice's lit edge (#2f3136), lifted to 3.1:1 for comments
+accent    = "#8fb4de"
+selection = "#232833"
+muted     = "#5a5f6b"
+
+# True neutral black, not a tinted near-black: the lattice wallpaper sits at
+# #141416 and the dunes at #171717, so any hue in the surfaces would read as a
+# cast against them. `background` goes one step below the wallpaper and the
+# others step either side of it; window transparency lets the real wallpaper
+# through on top.
+background         = "#0b0b0e"
+dark_background    = "#08080b"
+darker_background  = "#050506"
+lighter_background = "#17181c"
+
+# foreground <- the silver highlight on the dune ridge, slightly cooled
+foreground        = "#d7dae0"
+dark_foreground   = "#8d9199"
+light_foreground  = "#e8eaee"
+bright_foreground = "#ffffff"
+
+# A glass rim lit from above: pale silver (#d7e4f8, 40%) catching the top
+# edge and settling into the accent (#8fb4de, 18%) at the bottom (90 degrees
+# = top to bottom). Inactive windows keep only `selection` at 50%, a soft
+# graphite edge in the same glass as the bar and the windows. The shell's
+# [hyprland] tokens take this too, so menus, panels and notifications wear the
+# same rim. Kept in step by hand with hyprland.lua, which is written out
+# rather than generated.
+hyprland_active_border   = "rgba(d7e4f866) rgba(8fb4de2e) 90deg"
+hyprland_inactive_border = "rgba(23283380)"
+
+red     = "#e5545a"
+yellow  = "#ecc46a"
+orange  = "#f0894a"
+green   = "#57d9a3"
+cyan    = "#5cd0e0"
+blue    = "#5aa2f0"
+magenta = "#a67cf0"
+brown   = "#8a7a6a"
+
+bright_red     = "#ff757b"
+bright_yellow  = "#f7d68a"
+bright_green   = "#7ceac0"
+bright_cyan    = "#8ae0ee"
+bright_blue    = "#86bcff"
+bright_magenta = "#c29aff"
