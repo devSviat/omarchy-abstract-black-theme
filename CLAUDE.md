@@ -138,7 +138,7 @@ Re-applying advances the wallpaper rotation; this machine pins it back with
 
 Editing `colors.toml` makes `preview.png` and `preview-full.png` stale
 (`PREVIEW_WORKSPACE=<n> ./tools/capture-preview.sh`, needs an empty
-workspace; commit first, Neovim's git signs mark uncommitted lines in the
+workspace and Files closed; commit first, Neovim's git signs mark uncommitted lines in the
 shot) and `unlock.png` / `preview-unlock.png` stale
 (`./tools/generate-unlock.sh`).
 

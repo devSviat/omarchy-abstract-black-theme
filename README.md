@@ -124,8 +124,8 @@ The full theme. Needs Omarchy 4 (Hyprland with the Lua config and the Quickshell
      workspace and run `PREVIEW_WORKSPACE=<n> ./tools/capture-preview.sh`. It
      applies each look for real — the gallery install included, staged the way
      Omarchy would stage a clone — screenshots it (with `grim`, `foot`,
-     `fastfetch` and `nvim`, all shipped with Omarchy) and puts your previous
-     theme back.
+     `nvim` and Files, all shipped with Omarchy; close Files first) and puts
+     your previous theme back.
 
 ### Update
 
