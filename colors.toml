@@ -53,7 +53,7 @@ bright_foreground = "#ffffff"
 # = top to bottom). Inactive windows keep only `selection` at 50%, a soft
 # graphite edge in the same glass as the bar and the windows. The shell's
 # [hyprland] tokens take this too, so menus, panels and notifications wear the
-# same rim. Kept in step by hand with hyprland.lua, which is written out
+# same rim. Kept in step by hand with hyprland.lua.example, which is written out
 # rather than generated.
 hyprland_active_border   = "rgba(d7e4f866) rgba(8fb4de2e) 90deg"
 hyprland_inactive_border = "rgba(20232980)"

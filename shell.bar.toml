@@ -3,7 +3,9 @@
 # here. Dropping a key silently reverts it to a QML default rather than to the
 # template value.
 #
-# The bar is glass: Hyprland blurs behind the omarchy-bar layer (hyprland.lua).
+# The bar is glass: Hyprland blurs behind the omarchy-bar layer
+# (hyprland.lua.example). A cloned install has no blur and shows the tint
+# alone, which holds up because only wallpaper is ever under the bar.
 #
 # Unlike the windows, the bar is tinted with `lighter_background`, not
 # `background`. Both wallpapers are near-black, so a bar carrying the theme's

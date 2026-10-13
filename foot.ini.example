@@ -3,6 +3,10 @@
 # only, so glyphs stay fully opaque while Hyprland blurs the wallpaper behind
 # the window. Colours mirror colors.toml.
 #
+# Named .example, like the other terminal configs, because omarchy-theme-set
+# drops them from a theme cloned by `omarchy theme install`;
+# tools/install-theme.sh links each in under its real name.
+#
 # blur=yes is required, not decoration: a foot built with +blur speaks
 # ext-background-effect-v1 to Hyprland and, with the default blur=no, tells the
 # compositor NOT to blur behind it. The window is then translucent but sharp —
