@@ -1,0 +1,17 @@
+# Full [menu] section. Clipboard and emoji pickers inherit these tokens.
+# A faint unblurred scrim with a frosted card on it: the layer rule in
+# hyprland.lua gates blur at alpha 0.55, so the desktop stays sharp and visible
+# around the card instead of the whole screen going to a dark blur.
+background                = "#0b0b0b"
+background-alpha          = 0.68
+text                      = "#d7dae0"
+border                    = "hyprland.active-border-foreground"
+border-alpha              = 0.85
+scrim                     = "#050505"
+scrim-alpha               = 0.1
+# The selected row is lit in the accent.
+selected-background       = "#8fb4de"
+selected-background-alpha = 0.2
+selected-text             = "#ffffff"
+selected-border           = "hyprland.active-border-foreground"
+selected-border-alpha     = 0.35

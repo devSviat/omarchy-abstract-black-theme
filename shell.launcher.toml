@@ -1,13 +1,12 @@
-# Full [launcher] section. Same glass treatment as [menu]: faint unblurred
-# scrim, frosted card.
+# Full [launcher] section. Near-opaque for the same reason as shell.menu.toml;
+# shell.launcher.toml.example is the glass card.
 background                = "#0b0b0b"
-background-alpha          = 0.62
+background-alpha          = 0.94
 text                      = "#d7dae0"
 border                    = "hyprland.active-border-foreground"
 border-alpha              = 0.85
 scrim                     = "#050505"
 scrim-alpha               = 0.1
-# The selected row is lit in the accent.
 selected-background       = "#8fb4de"
 selected-background-alpha = 0.2
 selected-text             = "#ffffff"
