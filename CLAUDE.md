@@ -38,6 +38,11 @@ opaque terminals. The user-facing account is "Two ways to install" in
 README.md; keep it in step with the script. Rerun the script after adding or
 renaming a top-level file.
 
+`unlock.png` is the one file copied rather than linked: since Omarchy 4.0.5
+`omarchy-plymouth-set` rejects a symlinked logo ("Logo file is a symlink, which
+is not accepted"). Rerun the script after regenerating it, or "Set unlock"
+picks up the stale copy.
+
 `preview.png` is the gallery install and `preview-full.png` the full one,
 linked in as the switcher thumbnail.
 

@@ -92,8 +92,9 @@ The full theme. Needs Omarchy 4 (Hyprland with the Lua config and the Quickshell
    ```
 
    This creates `~/.config/omarchy/themes/abstract-black` as a directory of
-   absolute symlinks into the repo. It then shows up in Omarchy Menu → Style → Theme as **Abstract
-   Black**.
+   absolute symlinks into the repo — all but `unlock.png`, which is copied
+   because Omarchy refuses a symlinked unlock logo. It then shows up in Omarchy
+   Menu → Style → Theme as **Abstract Black**.
 
 3. **Apply it** — from that menu, or:
 
@@ -132,7 +133,7 @@ The full theme. Needs Omarchy 4 (Hyprland with the Lua config and the Quickshell
 ```bash
 cd ~/Projects/omarchy-abstract-black-theme
 git pull
-./tools/install-theme.sh           # picks up any new or renamed top-level file
+./tools/install-theme.sh           # picks up new or renamed files and a changed unlock.png
 omarchy theme set abstract-black   # re-apply to stage the changes
 ```
 
@@ -141,7 +142,7 @@ omarchy theme set abstract-black   # re-apply to stage the changes
 Switch to another theme first, then:
 
 ```bash
-rm -r ~/.config/omarchy/themes/abstract-black   # only links, the repo is untouched
+rm -r ~/.config/omarchy/themes/abstract-black   # links and an unlock.png copy, the repo is untouched
 ```
 
 If you set up the extras, also remove the `~/.config/gtk-4.0/gtk.css` link.
