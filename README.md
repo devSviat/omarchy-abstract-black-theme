@@ -21,9 +21,10 @@ animations (details in [Install](#install)):
 ```bash
 git clone https://github.com/devSviat/omarchy-abstract-black-theme.git ~/Projects/omarchy-abstract-black-theme
 cd ~/Projects/omarchy-abstract-black-theme
-./tools/install-theme.sh
-omarchy theme set abstract-black
 ```
+
+then link it into Omarchy as in [Install](#install), step 2, and
+`omarchy theme set abstract-black`.
 
 [Two ways to install](#two-ways-to-install) lists exactly what each one gives
 you.
@@ -48,7 +49,7 @@ That also decides three things the wallpapers set directly:
 
 ## Two ways to install
 
-| | `omarchy theme install` | `tools/install-theme.sh` |
+| | `omarchy theme install` | Full install from a checkout |
 |---|---|---|
 | Palette, wallpapers, bar, icons, unlock screen | yes | yes |
 | Blur, rounded glass windows, shadows, animations | no | yes |
@@ -62,7 +63,7 @@ animations and the terminal transparency, so they are kept here under a
 `.example` suffix — `hyprland.lua.example`, `foot.ini.example` and so on —
 which Omarchy stages but never loads.
 
-`install-theme.sh` builds the theme as a directory of symlinks into your
+The full install builds the theme as a directory of symlinks into your
 checkout and links every `<name>.example` in as `<name>`. That directory holds
 no `.git`, so Omarchy stages it in full. The four `shell.*.toml.example` files
 are the translucent menu, launcher, notification and popup cards; without a
@@ -70,8 +71,8 @@ blur behind them the window underneath shows through the text, so the plain
 `shell.*.toml` files the gallery install uses are near-opaque instead.
 
 To move from the gallery install to the full one, remove it first —
-`omarchy theme remove abstract-black` — then follow [Install](#install); the
-script refuses to replace a theme directory it did not create.
+`omarchy theme remove abstract-black` — then follow [Install](#install); its
+link step stops if a theme directory of that name already exists.
 
 ## Install
 
@@ -88,12 +89,24 @@ The full theme. Needs Omarchy 4 (Hyprland with the Lua config and the Quickshell
 2. **Install it:**
 
    ```bash
-   ./tools/install-theme.sh
+   repo=$PWD dir=$HOME/.config/omarchy/themes/abstract-black
+   mkdir "$dir" && for f in "$repo"/*; do
+     name=${f##*/}
+     case $name in
+       CLAUDE.md | preview.png | preview-full.png) ;;
+       unlock.png) cp "$f" "$dir/" ;;
+       *.example) ln -s "$f" "$dir/${name%.example}" ;;
+       *) [ -e "$f.example" ] || ln -s "$f" "$dir/" ;;
+     esac
+   done && ln -s "$repo/preview-full.png" "$dir/preview.png"
    ```
 
    This creates `~/.config/omarchy/themes/abstract-black` as a directory of
    absolute symlinks into the repo — all but `unlock.png`, which is copied
-   because Omarchy refuses a symlinked unlock logo. It then shows up in Omarchy
+   because Omarchy refuses a symlinked unlock logo. Every `<name>.example` is
+   linked in as `<name>`. The links are absolute because Omarchy stages a theme
+   with `cp -r`, and `.git` is left out because Omarchy strips every `*.lua`
+   from a theme that holds one. It then shows up in Omarchy
    Menu → Style → Theme as **Abstract Black**.
 
 3. **Apply it** — from that menu, or:
@@ -121,21 +134,18 @@ The full theme. Needs Omarchy 4 (Hyprland with the Lua config and the Quickshell
    - *The bar* works with its background on or off — double-click the bar to
      switch. The theme's bar tint shows only with the background on.
 
-   - *Retake the thumbnails* after changing the palette: pick an empty
-     workspace and run `PREVIEW_WORKSPACE=<n> ./tools/capture-preview.sh`. It
-     applies each look for real — the gallery install included, staged the way
-     Omarchy would stage a clone — screenshots it (with `grim`, `foot`,
-     `nvim` and Files, all shipped with Omarchy; close Files first) and puts
-     your previous theme back.
-
 ### Update
 
 ```bash
 cd ~/Projects/omarchy-abstract-black-theme
 git pull
-./tools/install-theme.sh           # picks up new or renamed files and a changed unlock.png
 omarchy theme set abstract-black   # re-apply to stage the changes
 ```
+
+The theme is links into the checkout, so a pull is enough for changed files.
+If the pull adds or renames a top-level file or changes `unlock.png`, first
+remove the theme directory (see [Uninstall](#uninstall)) and repeat step 2 of
+[Install](#install).
 
 ### Uninstall
 
@@ -223,11 +233,7 @@ the top running down to the accent, the same gradient the window rim carries.
 It is a **logo, not a wallpaper**. Omarchy's Plymouth script draws it centred at
 its native size and puts the password entry 40 px below it, so a full-screen
 image pushes the LUKS prompt off the display; it stays 520 px square with a
-transparent background. Rebuild both it and its picker thumbnail with:
-
-```bash
-./tools/generate-unlock.sh      # ImageMagick + rsvg-convert, no network
-```
+transparent background.
 
 Apply it separately, and only when you want it:
 
