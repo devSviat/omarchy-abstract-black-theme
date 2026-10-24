@@ -12,6 +12,11 @@ the full account of how Omarchy 4 theming works and is not duplicated here.
 The design brief and the reasoning behind each value are in
 [`docs/DESIGN.md`](docs/DESIGN.md).
 
+`tools/` is local only and gitignored: the gallery's audit bot rejects a theme
+repo that carries any script, wherever it sits. Never commit it; the
+user-facing full install is the shell lines in README.md's Install, keep them
+in step with the local install script.
+
 ## Two installs: the gallery clone and `tools/install-theme.sh`
 
 The theme is listed in the Omarchy gallery (omacom/omarchy-site), which

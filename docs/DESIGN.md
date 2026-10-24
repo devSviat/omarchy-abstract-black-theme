@@ -155,11 +155,10 @@ https://omarchy.org/brand/ — the labyrinth "O". The brief explicitly asked for
 the mark and not `omarchy-wordmark.svg`, and asked for it in the theme's
 colours.
 
-The file is a single path with one flat `fill="#9ece6a"`, so
-`tools/generate-unlock.sh` swaps that for a top-to-bottom gradient
-`#d7e4f8` → `#8fb4de` — the same run of light as `hyprland_active_border`, so
-the splash and the window rims are lit identically. The script fails loudly if
-the brand file ever stops carrying exactly one such fill.
+The file is a single path with one flat `fill="#9ece6a"`, so `unlock.png`
+swaps that for a top-to-bottom gradient `#d7e4f8` → `#8fb4de` — the same run
+of light as `hyprland_active_border`, so the splash and the window rims are
+lit identically.
 
 Size 520 px square. Plymouth's `omarchy.script` centres the logo at its native
 size and puts the password entry at `logo.y + logo.height + 40`; at 520 px on a

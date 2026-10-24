@@ -1,7 +1,7 @@
 -- Abstract Black — Hyprland side of the theme.
 --
 -- Named .example because omarchy-theme-set drops every *.lua from a theme
--- cloned by `omarchy theme install`; tools/install-theme.sh links this file in
+-- cloned by `omarchy theme install`; the full install in README.md links it in
 -- as hyprland.lua.
 --
 -- Hand-written instead of generated from default/themed/hyprland.lua.tpl: the
