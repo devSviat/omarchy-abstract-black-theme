@@ -158,6 +158,11 @@ o.window({ tag = "default-opacity" }, { opacity = "0.9 0.82" })
 -- default-opacity rule above so it wins for terminal windows.
 o.window({ tag = "terminal" }, { opacity = "1.0 0.94" })
 
+-- The screenshot editor shows a capture of the desktop; at 0.9 that capture
+-- blends with the same windows behind it. Omarchy's opaque media list
+-- (default/hypr/apps/system.lua) does not include Tensaku, so it is added here.
+o.window("dev.tensaku.Tensaku", { tag = "-default-opacity", opacity = "1 1" })
+
 -- Blur behind the Omarchy shell's own layer surfaces. Their alpha comes from
 -- the shell.*.toml sections; ignore_alpha skips blurring any pixel at or below
 -- that alpha.
