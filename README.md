@@ -20,6 +20,7 @@ animations (details in [Install](#install)):
 
 ```bash
 git clone https://github.com/devSviat/omarchy-abstract-black-theme.git ~/Projects/omarchy-abstract-black-theme
+git clone https://github.com/devSviat/omarchy-theme-extras.git ~/Projects/omarchy-theme-extras
 cd ~/Projects/omarchy-abstract-black-theme
 ```
 
@@ -59,13 +60,15 @@ That also decides three things the wallpapers set directly:
 A theme cloned by `omarchy theme install` is treated as untrusted: Omarchy
 drops every `*.lua` and the four terminal configs from it and generates its
 own from `colors.toml`. Those are exactly the files that carry the blur, the
-animations and the terminal transparency, so they are kept here under a
-`.example` suffix — `hyprland.lua.example`, `foot.ini.example` and so on —
-which Omarchy stages but never loads.
+animations and the terminal transparency. The terminal configs are kept here
+under a `.example` suffix — `foot.ini.example` and so on — which Omarchy
+stages but never loads. `hyprland.lua` lives in a separate repository,
+[omarchy-theme-extras](https://github.com/devSviat/omarchy-theme-extras), because the Omarchy theme gallery does not
+list a theme repository that ships Lua.
 
 The full install builds the theme as a directory of symlinks into your
-checkout and links every `<name>.example` in as `<name>`. That directory holds
-no `.git`, so Omarchy stages it in full. The four `shell.*.toml.example` files
+checkout, links every `<name>.example` in as `<name>` and links `hyprland.lua`
+in from omarchy-theme-extras. That directory holds no `.git`, so Omarchy stages it in full. The four `shell.*.toml.example` files
 are the translucent menu, launcher, notification and popup cards; without a
 blur behind them the window underneath shows through the text, so the plain
 `shell.*.toml` files the gallery install uses are near-opaque instead.
@@ -78,18 +81,21 @@ link step stops if a theme directory of that name already exists.
 
 The full theme. Needs Omarchy 4 (Hyprland with the Lua config and the Quickshell bar).
 
-1. **Get the repo** somewhere permanent — the theme points into it, so don't
-   move or delete it afterwards:
+1. **Get the repos** somewhere permanent — the theme points into them, so
+   don't move or delete them afterwards. The theme's `hyprland.lua` lives in a
+   repository of its own, [omarchy-theme-extras](https://github.com/devSviat/omarchy-theme-extras):
 
    ```bash
    git clone https://github.com/devSviat/omarchy-abstract-black-theme.git ~/Projects/omarchy-abstract-black-theme
+   git clone https://github.com/devSviat/omarchy-theme-extras.git ~/Projects/omarchy-theme-extras
    cd ~/Projects/omarchy-abstract-black-theme
    ```
 
 2. **Install it:**
 
    ```bash
-   repo=$PWD dir=$HOME/.config/omarchy/themes/abstract-black
+   repo=$PWD extras=$HOME/Projects/omarchy-theme-extras
+   dir=$HOME/.config/omarchy/themes/abstract-black
    mkdir "$dir" && for f in "$repo"/*; do
      name=${f##*/}
      case $name in
@@ -98,13 +104,14 @@ The full theme. Needs Omarchy 4 (Hyprland with the Lua config and the Quickshell
        *.example) ln -s "$f" "$dir/${name%.example}" ;;
        *) [ -e "$f.example" ] || ln -s "$f" "$dir/" ;;
      esac
-   done && ln -s "$repo/preview-full.png" "$dir/preview.png"
+   done && ln -s "$repo/preview-full.png" "$dir/preview.png" &&
+     ln -s "$extras/abstract-black/hyprland.lua" "$dir/hyprland.lua"
    ```
 
    This creates `~/.config/omarchy/themes/abstract-black` as a directory of
    absolute symlinks into the repo — all but `unlock.png`, which is copied
    because Omarchy refuses a symlinked unlock logo. Every `<name>.example` is
-   linked in as `<name>`. The links are absolute because Omarchy stages a theme
+   linked in as `<name>`, and `hyprland.lua` comes from omarchy-theme-extras. The links are absolute because Omarchy stages a theme
    with `cp -r`, and `.git` is left out because Omarchy strips every `*.lua`
    from a theme that holds one. It then shows up in Omarchy
    Menu → Style → Theme as **Abstract Black**.
@@ -137,12 +144,12 @@ The full theme. Needs Omarchy 4 (Hyprland with the Lua config and the Quickshell
 ### Update
 
 ```bash
-cd ~/Projects/omarchy-abstract-black-theme
-git pull
+git -C ~/Projects/omarchy-abstract-black-theme pull
+git -C ~/Projects/omarchy-theme-extras pull
 omarchy theme set abstract-black   # re-apply to stage the changes
 ```
 
-The theme is links into the checkout, so a pull is enough for changed files.
+The theme is links into the checkouts, so a pull is enough for changed files.
 If the pull adds or renames a top-level file or changes `unlock.png`, first
 remove the theme directory (see [Uninstall](#uninstall)) and repeat step 2 of
 [Install](#install).
@@ -156,7 +163,8 @@ rm -r ~/.config/omarchy/themes/abstract-black   # links and an unlock.png copy, 
 ```
 
 If you set up the extras, also remove the `~/.config/gtk-4.0/gtk.css` link.
-Then delete the repo itself.
+Then delete the repo itself, and `~/Projects/omarchy-theme-extras` unless
+another theme still links into it.
 
 ## Palette
 
@@ -177,13 +185,13 @@ Then delete the repo itself.
 ## Glass
 
 The full install. A file listed with `.example` is linked in without the
-suffix.
+suffix; `hyprland.lua` is the one in omarchy-theme-extras.
 
 | What | Where | Setting |
 |---|---|---|
-| Blur | `hyprland.lua.example` | size 9, 3 passes, brightness 0.80, vibrancy 0.10 |
-| Glass edge | `hyprland.lua.example` | rim border, superellipse corners (`rounding_power 2.5`), shadow offset 3 px right / 6 px down |
-| App windows | `hyprland.lua.example` | opacity 0.90 active / 0.82 inactive |
+| Blur | `hyprland.lua` | size 9, 3 passes, brightness 0.80, vibrancy 0.10 |
+| Glass edge | `hyprland.lua` | rim border, superellipse corners (`rounding_power 2.5`), shadow offset 3 px right / 6 px down |
+| App windows | `hyprland.lua` | opacity 0.90 active / 0.82 inactive |
 | Terminals | `foot.ini.example`, `ghostty.conf.example`, `alacritty.toml.example`, `kitty.conf.example` | background alpha 0.72 + blur requested, window 1.0 / 0.94 |
 | Bar | `shell.bar.toml` | `lighter_background` at 0.62 → about `#141515`, one step *above* the windows' `#0d0d0e`, so it reads as chrome on the black rather than a hole in it |
 | Menu / launcher | `shell.menu.toml.example`, `shell.launcher.toml.example` | card 0.68 / 0.62, scrim 0.1 (unblurred), selected row in the accent |

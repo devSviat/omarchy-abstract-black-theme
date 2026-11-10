@@ -26,17 +26,24 @@ every `*.lua`, the four terminal configs and `vscode.json` from it, then
 generates its own from `colors.toml`. The gallery's audit bot rejects a repo
 that ships those names, so they live here as `.example`:
 
-- `hyprland.lua.example`, `foot.ini.example`, `ghostty.conf.example`,
-  `alacritty.toml.example`, `kitty.conf.example` — the glass itself.
+- `foot.ini.example`, `ghostty.conf.example`, `alacritty.toml.example`,
+  `kitty.conf.example` — the translucent terminals.
 - `shell.{menu,launcher,notifications,popups}.toml.example` — the translucent
   cards. Each has a plain twin at 0.94 for the gallery install, where nothing
   blurs behind the card and the window underneath ran through the menu text.
   **The twins differ only in `background-alpha` and the header comment**;
   change a colour in one and change it in the other.
 
+`hyprland.lua` — blur, animations, window rules — is not in this repo at all.
+Since 2026-11-05 the bot rejects any Lua in a theme repo, `.example` included,
+as code. It lives in `~/Projects/omarchy-theme-extras`
+(github.com/devSviat/omarchy-theme-extras) as `abstract-black/hyprland.lua`,
+and the install links it in. Never add Lua back here.
+
 `./tools/install-theme.sh` builds `~/.config/omarchy/themes/abstract-black` as
 a directory of absolute symlinks and links every `<name>.example` in as
-`<name>` (the plain twin is then skipped), so this machine runs the full
+`<name>` (the plain twin is then skipped) and `hyprland.lua` from
+omarchy-theme-extras, so this machine runs the full
 theme. That directory holds no `.git`, so it stages in full. A gallery user
 gets palette, wallpapers, bar and near-opaque cards — no blur, no animations,
 opaque terminals. The user-facing account is "Two ways to install" in
@@ -53,7 +60,7 @@ linked in as the switcher thumbnail.
 
 ## No glass variant, on purpose
 
-The user chose one theme. `hyprland.lua.example` ends with a small guard: if hyprglass
+The user chose one theme. `hyprland.lua` (extras) ends with a small guard: if hyprglass
 happens to be loaded from `~/.config/hypr/autostart.lua` (it is, on this
 machine, for the Star Wars Glass theme), this theme switches it off rather than
 inherit its refraction. Do not add a `*-glass` slug without being asked.
@@ -62,13 +69,13 @@ inherit its refraction. Do not add a `*-glass` slug without being asked.
 
 | Layer | File | Value |
 |---|---|---|
-| Animations (curves lift / settle / glide / shift) | `hyprland.lua.example` | Star Wars' speeds exactly, renamed; workspaces `slidefade 20%` at 250 ms |
-| Blur, shadow, rounding, border | `hyprland.lua.example` | blur 9 x 3 passes, brightness 0.80, vibrancy 0.10, rounding 14 / power 2.5, shadow offset 3,6 |
-| Window opacity (non-terminal) | `hyprland.lua.example` | `default-opacity` tag -> `0.9 0.82` |
-| Terminal window opacity | `hyprland.lua.example` | `terminal` tag -> `1.0 0.94` |
+| Animations (curves lift / settle / glide / shift) | `hyprland.lua` (extras) | Star Wars' speeds exactly, renamed; workspaces `slidefade 20%` at 250 ms |
+| Blur, shadow, rounding, border | `hyprland.lua` (extras) | blur 9 x 3 passes, brightness 0.80, vibrancy 0.10, rounding 14 / power 2.5, shadow offset 3,6 |
+| Window opacity (non-terminal) | `hyprland.lua` (extras) | `default-opacity` tag -> `0.9 0.82` |
+| Terminal window opacity | `hyprland.lua` (extras) | `terminal` tag -> `1.0 0.94` |
 | Terminal background | `foot.ini.example`, `ghostty.conf.example`, `alacritty.toml.example`, `kitty.conf.example` | alpha 0.72 |
 | Shell bar / menus / notifications | `shell.*.toml`, `shell.*.toml.example` | `background-alpha` 0.55 – 0.9 in the full install |
-| Blur behind shell layers | `hyprland.lua.example` | `hl.layer_rule`: bar `ignore_alpha 0.15`, full-screen layers `0.55` so only the card blurs, never the scrim |
+| Blur behind shell layers | `hyprland.lua` (extras) | `hl.layer_rule`: bar `ignore_alpha 0.15`, full-screen layers `0.55` so only the card blurs, never the scrim |
 | GTK / libadwaita apps | `gtk.css` | rgba surfaces |
 
 Three values are deliberately NOT Star Wars', and each is tied to the
@@ -128,7 +135,7 @@ the three-way measurement. Keep each pin equal to the variable it mirrors.
 2. **`shell.<section>.toml` replaces a section, it does not merge.** Every file
    carries the complete section; a dropped key reverts to a QML default, not to
    the template value.
-3. **`hyprland.lua.example` and the terminal configs are hand-written**, so their
+3. **`hyprland.lua` (extras) and the terminal configs are hand-written**, so their
    colours are not generated. Keep the border values in step with
    `hyprland_active_border` / `hyprland_inactive_border`, and the terminal
    palettes with `colors.toml`.
