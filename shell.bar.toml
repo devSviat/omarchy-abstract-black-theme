@@ -4,7 +4,7 @@
 # template value.
 #
 # The bar is glass: Hyprland blurs behind the omarchy-bar layer
-# (hyprland.lua.example). A cloned install has no blur and shows the tint
+# (hyprland.lua in omarchy-theme-extras). A cloned install has no blur and shows the tint
 # alone, which holds up because only wallpaper is ever under the bar.
 #
 # Unlike the windows, the bar is tinted with `lighter_background`, not
